@@ -1,0 +1,27 @@
+<h1>Habit Tracker</h1>
+<p> <%= @message %> </p>
+<% if @username %>
+  <p>Logged in as
+    <%= @username %>
+  </p>
+  <p>
+    <a href="/logout">Logout</a>
+  </p>
+<% else %>
+  <p>
+    <a href="/login">Login</a>
+  </p>
+<% end %>
+<% if @habits != nil %>
+  <h2>Your Habits</h2>
+  <ul>
+    <% @habits.each do |habit| %>
+      <li><%= habit %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% if @username %>
+  <a href="/habits/new">Add New Habit</a>
+  <br/>
+  <a href="/profile">Profile</a>
+<% end %>

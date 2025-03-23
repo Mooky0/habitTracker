@@ -1,0 +1,12 @@
+<h1>Login</h1>
+<%= form_with url: login_path, method: :post do %>
+  <label>Username:</label>
+  <%= text_field_tag :username %><br>
+
+  <label>Password:</label>
+  <%= password_field_tag :password %><br>
+
+  <%= submit_tag "Login" %>
+<% end %>
+
+<%= link_to "Register", register_path %>
