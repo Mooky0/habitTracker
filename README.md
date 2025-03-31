@@ -1,5 +1,8 @@
 # README
 
+
+Use admin/admin as username/password to log into the static website.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   # Profile route
   get "/profile", to: "profiles#show"
+  post "/profile", to: "profiles#update"
+  patch "/profile", to: "profiles#update"
+  profile_path = "/profile"
 
   # Habit routes
   get "/habits/new", to: "habits#new", as: :new_habit

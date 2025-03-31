@@ -1,11 +1,52 @@
-<h1>Profile</h1>
-<p>Username: <%= @username %></p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card p-4 shadow-sm" style="border-radius: 10px;">
+        <div class="row">
+          <!-- User Data Form -->
+          <div class="col-md-6">
+            <h3 class="text-center mb-3"
+              style="font-family: 'Georgia', serif;">User data</h3>
 
-<h2>Your Habits</h2>
-<ul>
-  <% @habits.each do |habit| %>
-    <li><%= habit %></li>
-  <% end %>
-</ul>
+            <%= form_with model: @user, url: profile_path, method: :patch do
+            |f|%>
+            <div class="mb-3">
+              <%= label_tag :email, "Email address", class: "form-label" %>
+              <%= f.text_field :email, class: "form-control", disabled: true %>
+            </div>
 
-<%= link_to "Add New Habit", new_habit_path %>
+            <div class="mb-3">
+              <%= label_tag :full_name, "Name", class: "form-label" %>
+              <%= f.text_field :full_name, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= label_tag :username, "Username", class: "form-label" %>
+              <%= f.text_field :username, class: "form-control" %>
+            </div>
+
+            <div class="text-end">
+              <%= submit_tag "Save", class: "btn btn-secondary" %>
+            </div>
+            <% end %>
+          </div>
+
+          <!-- User Stats -->
+          <div class="col-md-6 border-start">
+            <h3 class="text-center mb-3"
+              style="font-family: 'Georgia', serif;">User stats</h3>
+
+            <p><strong>Tracked habits:</strong> <%= @user.tracked_habits %></p>
+            <p><strong>Completed habits:</strong> <%= @user.completed_habits
+              %></p>
+            <p><strong>Missed days:</strong> <%= @user.missed_days %></p>
+            <p><strong>Ratio:</strong> <%= number_to_percentage(@user.ratio,
+              precision: 2) %></p>
+            <p><strong>Joined:</strong> <%=
+              @user.created_on.strftime("%Y, %m, %d") %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

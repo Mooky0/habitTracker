@@ -19,9 +19,40 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
+
+
+    <header class="bg-light py-2 shcadow">
+      <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <%= link_to "Habit tracker", root_path, class: "navbar-brand text-dark fw-bold" %>
+      </div>
+      <nav>
+        <ul class="nav">
+          <% if session[:username] %>
+            <li class="nav-item"><%= link_to "Profile", profile_path, class: "nav-link" %></li>
+            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-link text-dark" %>
+          <% else %>
+            <li class="nav-item"><%= link_to "Login", login_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Register", register_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+      </nav>
+      </div> 
+    </header>
+
+    <main class="flex-grow-1 d-flex justify-content-center align-items-center py-5">
     <%= yield %>
+    </main>
+
+    <footer class="bg-dark align-center text-white text-center py-3 mt-auto">
+      <div class="container">
+        <p class="text-center">&copy; <%= Time.now.year %> Habit Tracker</p>
+      </div>
+    </footer>
+
   </body>
 </html>

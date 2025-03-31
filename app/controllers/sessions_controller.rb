@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     username = params[:username]
     password = params[:password]
 
-    if username == "admin" && password == "password"
+    if username == "admin" && password == "admin"
       session[:username] = username
       redirect_to root_path, notice: "Logged in!"
     else
@@ -17,6 +17,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    print "destroy"
+    session[:username] = nil
+    session.delete(:username)
     redirect_to root_path, notice: "Logged out!"
   end
 end

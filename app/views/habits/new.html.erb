@@ -1,10 +1,34 @@
-<h1>Add a New Habit</h1>
+<div class="container d-flex justify-content-center align-items-center py-5">
+  <div class="card shadow p-4" style="width: 380px; background-color: #fdf8f1; border-radius: 10px;">
+    <h2 class="text-center mb-4" style="font-family: 'Georgia', serif;">New Habit</h2>
 
-<%= form_with url: habits_path, method: :post do %>
-  <label>Habit Name:</label>
-  <%= text_field_tag :habit_name %><br>
+    <%= form_with url: habits_path, method: :post, class: "w-100" do %>
+      <!-- Habit Name -->
+      <div class="mb-3">
+        <%= label_tag :habit_name, "New habit name", class: "form-label" %>
+        <%= text_field_tag :habit_name, nil, class: "form-control", placeholder: "My new habit" %>
+      </div>
 
-  <%= submit_tag "Add Habit" %>
-<% end %>
+      <!-- Daily Habit Checkbox -->
+      <div class="mb-3 form-check">
+        <%= check_box_tag :is_daily, true, true, class: "form-check-input" %>
+        <%= label_tag :is_daily, "Sets if new habit should be done daily", class: "form-check-label" %>
+      </div>
 
-<%= link_to "Back to Profile", profile_path %>
+      <!-- Habit Color Picker -->
+      <div class="mb-3">
+        <%= label_tag :color, "Habit color", class: "form-label" %>
+        <div class="input-group">
+          <%= color_field_tag :color, "#4D939F", class: "form-control form-control-color", style: "max-width: 50px;" %>
+          <%= text_field_tag :color_hex, "#4D939F", class: "form-control text-center", style: "max-width: 100px;" %>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <%= link_to "Cancel", profile_path, class: "btn btn-outline-secondary" %>
+        <%= submit_tag "Create", class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

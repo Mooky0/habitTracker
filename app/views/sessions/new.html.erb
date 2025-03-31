@@ -1,12 +1,20 @@
-<h1>Login</h1>
-<%= form_with url: login_path, method: :post do %>
-  <label>Username:</label>
-  <%= text_field_tag :username %><br>
+<div class="card shadow p-4" style="width: 350px; background-color: #fdf8f1; border-radius: 10px;">
+  <h2 class="text-center mb-4" style="font-family: 'Georgia', serif;">Habit Tracker Login</h2>
 
-  <label>Password:</label>
-  <%= password_field_tag :password %><br>
+  <%= form_with url: login_path, method: :post, class: "w-100" do %>
+    <div class="mb-3">
+      <%= label_tag :username, "Username", class: "form-label" %>
+      <%= text_field_tag :username, nil, class: "form-control" %>
+    </div>
 
-  <%= submit_tag "Login" %>
-<% end %>
+    <div class="mb-3">
+      <%= label_tag :password, "Password", class: "form-label" %>
+      <%= password_field_tag :password, nil, class: "form-control" %>
+    </div>
 
-<%= link_to "Register", register_path %>
+    <div class="d-grid gap-2">
+      <%= submit_tag "Log in", class: "btn btn-secondary" %>
+      <%= link_to "Register", register_path, class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>

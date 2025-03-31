@@ -1,27 +1,39 @@
-<h1>Habit Tracker</h1>
-<p> <%= @message %> </p>
-<% if @username %>
-  <p>Logged in as
-    <%= @username %>
-  </p>
-  <p>
-    <a href="/logout">Logout</a>
-  </p>
-<% else %>
-  <p>
-    <a href="/login">Login</a>
-  </p>
-<% end %>
-<% if @habits != nil %>
-  <h2>Your Habits</h2>
-  <ul>
-    <% @habits.each do |habit| %>
-      <li><%= habit %></li>
-    <% end %>
-  </ul>
-<% end %>
-<% if @username %>
-  <a href="/habits/new">Add New Habit</a>
-  <br/>
-  <a href="/profile">Profile</a>
-<% end %>
+<div class="container-fluid d-flex flex-column w-100">
+  <!-- Main content filling remaining space under the header -->
+  <div class="row flex-grow-1 w-100">
+    <!-- Main habit tracking table -->
+    <div class="col-12 d-flex flex-column overflow-auto w-100 pr-0">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center w-100">
+          <thead>
+            <tr class="bg-secondary text-light">
+              <th>January </th>
+              <% (1..31).each do |day| %>
+              <th><%= day %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% habits = ['10000 Steps', 'Workout', '2L of water', 'Mealprep',
+            '10 pm bedtime'] %>
+            <% habits.each do |habit| %>
+            <tr>
+              <td class="fw-bold"><%= habit %></td>
+              <% (1..31).each do |day| %>
+              <td class="p-0">
+                <% if rand(2) == 1 %>
+                <button type="button" class="btn btn-link">X</button>
+                <% else %>
+                <button type="button"
+                  class="btn btn-link"><span>&#8203;</span></button>
+                <% end %>
+              </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
