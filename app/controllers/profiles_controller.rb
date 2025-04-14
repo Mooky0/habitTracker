@@ -2,34 +2,34 @@ require 'ostruct'
 
 class ProfilesController < ApplicationController
   def show
-    @user = MockUser.new(
-      username: "mock_user",
-      full_name: "Mock User",
-      email: "mock@example.com",
-      tracked_habits: 3,
-      completed_habits: 2,
-      missed_days: 1,
-      ratio: 0.67,
-      created_on: Date.new(2022, 1, 1)
-    )
+    @user = User.find_by(username: session[:username])
+    if @user.nil?
+      redirect_to root_path, alert: "User not found"
+      return
+    end
   end
 
   def update
     # TODO Implement user profile update
-    @user = MockUser.new(
-      username: "mock_user",
-      full_name: "Mock User",
-      email: "mock@example.com",
-      tracked_habits: 3,
-      completed_habits: 2,
-      missed_days: 1,
-      ratio: 0.67,
-      created_on: Date.new(2022, 1, 1)
-    ) 
-    params[:user] = @user
-    redirect_to profile_path, notice: "Profile updated successfully."
+    user = User.find_by(username: session[:username])
+    if user.nil?
+      redirect_to root_path, alert: "User not found"
+      return
+    end
+    email = params[:user][:email]
+    full_name = params[:user][:full_name]
+    
+    user.update(email: email, full_name: full_name)
+    @user = User.find_by(username: session[:username])
+    if user.save
+      flash[:notice] = "Profile updated successfully!"
+      redirect_to profile_path
+    else
+      flash.now[:alert] = "Failed to update profile"
+      render :show, status: :unprocessable_entity
+    end
   end
-
+  
   private
 
   # def user_params

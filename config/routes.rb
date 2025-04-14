@@ -27,8 +27,9 @@ Rails.application.routes.draw do
   profile_path = "/profile"
 
   # Habit routes
-  get "/habits/new", to: "habits#new", as: :new_habit
+  post "/habits/new", to: "habits#new", as: :new_habit
   post "/habits", to: "habits#create"
+  new_habit_path = "/habits/new"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

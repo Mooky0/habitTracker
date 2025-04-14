@@ -7,21 +7,19 @@
         <table class="table table-bordered text-center w-100">
           <thead>
             <tr class="bg-secondary text-light">
-              <th>January </th>
-              <% (1..31).each do |day| %>
+              <th><%= @month_name %> </th>
+              <% (1..@days_in_month).each do |day| %>
               <th><%= day %></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
-            <% habits = ['10000 Steps', 'Workout', '2L of water', 'Mealprep',
-            '10 pm bedtime'] %>
-            <% habits.each do |habit| %>
+            <% @habits.each do |habit| %>
             <tr>
-              <td class="fw-bold"><%= habit %></td>
-              <% (1..31).each do |day| %>
+              <td class="fw-bold"><%= habit.name %></td>
+              <% (1..@days_in_month).each do |day| %>
               <td class="p-0">
-                <% if rand(2) == 1 %>
+                <% if day %>
                 <button type="button" class="btn btn-link">X</button>
                 <% else %>
                 <button type="button"
