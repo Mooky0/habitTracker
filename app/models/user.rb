@@ -9,8 +9,15 @@ class User < ApplicationRecord
 
     def load_virtual_attributes
         @tracked_habits = Habit.where(user_id: id).count
-        @completed_habits = habits.where(completed: true).count
-        @missed_days = habits.sum(&:missed_days)
-        @ratio = @completed_habits.to_f / @tracked_habits
+        habits = Habit.where(user_id: id)
+        @completed_habits = 0
+        @missed_days = 0 # Initialize @missed_days to 0
+
+        for habit in habits
+          @completed_habits += Activity.where(habit_id: habit.id, completed: true).count
+          @missed_days += Activity.where(habit_id: habit.id, completed: false).count
+        end
+
+        @ratio = @tracked_habits > 0 ? @completed_habits.to_f / @tracked_habits : 0
     end
 end

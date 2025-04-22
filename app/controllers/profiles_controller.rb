@@ -1,16 +1,17 @@
-require 'ostruct'
+require "ostruct"
 
 class ProfilesController < ApplicationController
   def show
     @user = User.find_by(username: session[:username])
+    @user.load_virtual_attributes
+    print @user.tracked_habits
     if @user.nil?
       redirect_to root_path, alert: "User not found"
-      return
+      nil
     end
   end
 
   def update
-    # TODO Implement user profile update
     user = User.find_by(username: session[:username])
     if user.nil?
       redirect_to root_path, alert: "User not found"
@@ -18,9 +19,12 @@ class ProfilesController < ApplicationController
     end
     email = params[:user][:email]
     full_name = params[:user][:full_name]
-    
+
     user.update(email: email, full_name: full_name)
+    user.save!
     @user = User.find_by(username: session[:username])
+    @user.load_virtual_attributes
+    print @user.tracked_habits
     if user.save
       flash[:notice] = "Profile updated successfully!"
       redirect_to profile_path
@@ -29,10 +33,6 @@ class ProfilesController < ApplicationController
       render :show, status: :unprocessable_entity
     end
   end
-  
-  private
 
-  # def user_params
-  #   params.require(:user).permit(:name, :username)
-  # end
+  private
 end
