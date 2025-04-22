@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
     password = params[:password]
 
     user = User.find_by(username: username)
-    print user.username
+    if !user.nil?
+      print user.username
+    end
     if user.nil?
       flash.now[:alert] = "Username doesn't exist"
       render :new, status: :unprocessable_entity

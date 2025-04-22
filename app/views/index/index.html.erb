@@ -19,11 +19,18 @@
               <td class="fw-bold"><%= habit.name %></td>
               <% (1..@days_in_month).each do |day| %>
               <td class="p-0">
-                <% if day %>
-                <button type="button" class="btn btn-link">X</button>
+                <% if habit.activities_days.include? day  %>
+                <button type="button" class="btn btn-link track-habit-btn"
+                data-habit-id="<%= habit.id %>"
+                data-date="<%= day %>">
+                  X
+                </button>
                 <% else %>
-                <button type="button"
-                  class="btn btn-link"><span>&#8203;</span></button>
+                <button type="button" class="btn btn-link track-habit-btn"
+                data-habit-id="<%= habit.id %>"
+                data-date="<%= day %>">
+                  <span>&#8203;</span>
+                </button>
                 <% end %>
               </td>
               <% end %>

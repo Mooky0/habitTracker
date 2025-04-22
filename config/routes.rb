@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   post "/habits/new", to: "habits#new", as: :new_habit
   post "/habits", to: "habits#create"
   new_habit_path = "/habits/new"
+  post "/track_habit", to: "habits#track"
+  post "/untrack_habit", to: "habits#untrack"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

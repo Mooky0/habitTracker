@@ -17,10 +17,13 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app %>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
+
+  
 
   <body class="d-flex flex-column min-vh-100">
 
@@ -60,6 +63,42 @@
         <p class="text-center">&copy; <%= Time.now.year %> Habit Tracker</p>
       </div>
     </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    // Attach event listeners to "track-habit-btn" buttons
+    document.querySelectorAll(".track-habit-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const habitId = button.getAttribute("data-habit-id");
+        const date = button.getAttribute("data-date");
+
+        fetch("/track_habit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+          },
+          body: JSON.stringify({ habit_id: habitId, date: date }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to track habit");
+            }
+          })
+          .then((data) => {
+            console.log("Habit tracked successfully:", data);
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+    });
+  });
+       
+  </script>
 
   </body>
 </html>
