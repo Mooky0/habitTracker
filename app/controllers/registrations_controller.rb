@@ -1,4 +1,4 @@
-require 'digest'
+require "digest"
 
 class RegistrationsController < ApplicationController
   def new
@@ -30,7 +30,7 @@ class RegistrationsController < ApplicationController
     end
 
     if username.present? && password1.present?
-      password_digest = Digest::SHA256.base64digest (password1)
+      password_digest = password1
       User.create(
         username: username,
         email: email,

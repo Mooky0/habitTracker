@@ -1,4 +1,4 @@
-require 'digest'
+require "digest"
 
 class SessionsController < ApplicationController
   def new
@@ -19,22 +19,19 @@ class SessionsController < ApplicationController
       return
     end
 
-   password_digest = Digest::SHA256.base64digest (password)
+   password_digest = password
    if user&.authenticate(password_digest)
       session[:username] = user.username
       session[:user_id] = user.id
       session[:email] = user.email
       flash[:notice] = "Logged in successfully!"
       redirect_to root_path
-      return
-    else
+      nil
+   else
       flash.now[:alert] = "Invalid username or password"
       render :new, status: :unprocessable_entity
-      return
-    end 
-
-     
-    
+      nil
+   end
   end
 
   def destroy
