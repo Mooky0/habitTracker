@@ -1,5 +1,5 @@
 <div class="card shadow p-4" style="width: 350px; background-color: #fdf8f1; border-radius: 10px;">
-  <h2 class="text-center mb-4" style="font-family: 'Georgia', serif;">Habit Tracker Register</h2>
+  <h2 class="text-center mb-4" style="font-family: 'Georgia', serif;">Habit Tracker Registration</h2>
     <%= form_with url: register_path, method: :post, class: "w-100" do %>
 
       <div class="mb-3">
@@ -8,7 +8,7 @@
       </div>
 
       <div class="mb-3">
-        <%= label_tag :full_name, "Name:", class: "form-label" %>
+        <%= label_tag :full_name, "Name", class: "form-label" %>
         <%= text_field_tag :full_name, nil, class: "form-control" %>
       </div>
 
@@ -28,7 +28,7 @@
       </div>
 
       <div class="d-grid gap-2">
-        <%= submit_tag "Log in", class: "btn btn-secondary" %>
+        <%= submit_tag "Register", class: "btn btn-secondary" %>
       </div>
 
     <% end %>

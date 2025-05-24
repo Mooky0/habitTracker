@@ -3,9 +3,14 @@
 one:
   habit: one
   date: 2025-03-23
-  completed: false
+  completed: true
 
 two:
   habit: two
   date: 2025-03-23
-  completed: false
+  completed: true
+
+three:
+  habit: one
+  date: 2025-03-24
+  completed: true

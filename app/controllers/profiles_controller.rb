@@ -3,7 +3,12 @@ require "ostruct"
 class ProfilesController < ApplicationController
   def show
     @user = User.find_by(username: session[:username])
-    @user.load_virtual_attributes
+    begin
+      @user.load_virtual_attributes
+    rescue StandardError => e
+      redirect_to root_path, alert: "User not found"
+      return
+    end
     print @user.tracked_habits
     if @user.nil?
       redirect_to root_path, alert: "User not found"
@@ -23,7 +28,12 @@ class ProfilesController < ApplicationController
     user.update(email: email, full_name: full_name)
     user.save!
     @user = User.find_by(username: session[:username])
-    @user.load_virtual_attributes
+    begin
+      @user.load_virtual_attributes
+    rescue StandardError => e
+      redirect_to root_path, alert: "User not found"
+      return
+    end
     print @user.tracked_habits
     if user.save
       flash[:notice] = "Profile updated successfully!"

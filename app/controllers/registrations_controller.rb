@@ -31,18 +31,23 @@ class RegistrationsController < ApplicationController
 
     if username.present? && password1.present?
       password_digest = password1
-      User.create(
+      user = User.create(
         username: username,
         email: email,
         full_name: full_name,
         password: password_digest
       )
-      flash[:notice] = "Registration successful!"
-      redirect_to root_path
-      user = User.find_by(username: username)
-      session[:username] = username
-      session[:user_id] = user.id
-      session[:email] = email
+      if user.save
+        flash[:notice] = "Registration successful!"
+        session[:username] = username
+        session[:user_id] = user.id
+        session[:email] = email
+        redirect_to root_path
+      else
+        puts user.errors.full_messages
+        flash.now[:alert] = user.errors.full_messages.join(", ")
+        render :new, status: :unprocessable_entity
+      end
     else
       flash.now[:alert] = "Username or password is invalid"
       render :new, status: :unprocessable_entity

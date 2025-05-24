@@ -13,12 +13,14 @@ Rails.application.routes.draw do
 
   # Routes for login/logout
   get "/login", to: "sessions#new"
-  post "/login", to: "sessions#create"
+  post "/login", to: "sessions#create", as: :sessions
   delete "/logout", to: "sessions#destroy"
+  sessions_path = "/login"
 
   # Routes for registration
-  get "/register", to: "registrations#new"
+  get "/register", to: "registrations#new", as: :registration
   post "/register", to: "registrations#create"
+  registration_path = "/register"
 
   # Profile route
   get "/profile", to: "profiles#show"

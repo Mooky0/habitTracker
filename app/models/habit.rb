@@ -4,6 +4,7 @@ class Habit < ApplicationRecord
 
   validates :name, presence: true
   validates :color, presence: true
+  validates :is_daily, presence: true
   validates :is_daily, inclusion: { in: [ true, false ] }
 
   attr_accessor :activities_days, :activities_completed

@@ -2,14 +2,14 @@
 
 one:
   user: one
-  name: MyString
+  name: Test Habit One
   is_daily: false
-  color: MyString
+  color: "#FF5733"
   created_on: 2025-03-23
 
 two:
   user: two
-  name: MyString
+  name: Test Habit Two
   is_daily: false
-  color: MyString
+  color: "#33FF57"
   created_on: 2025-03-23

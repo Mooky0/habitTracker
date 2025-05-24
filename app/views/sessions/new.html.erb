@@ -3,17 +3,17 @@
 
   <%= form_with url: login_path, method: :post, class: "w-100" do %>
     <div class="mb-3">
-      <%= label_tag :username, "Username", class: "form-label" %>
-      <%= text_field_tag :username, nil, class: "form-control" %>
+      <%= label_tag :username, "Username:", class: "form-label" %>
+      <%= text_field_tag :username, nil, placeholder: "Username", class: "form-control" %>
     </div>
 
     <div class="mb-3">
-      <%= label_tag :password, "Password", class: "form-label" %>
-      <%= password_field_tag :password, nil, class: "form-control" %>
+      <%= label_tag :password, "Password:", class: "form-label" %>
+      <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
     </div>
 
     <div class="d-grid gap-2">
-      <%= submit_tag "Log in", class: "btn btn-secondary" %>
+      <%= submit_tag "Login", class: "btn btn-secondary" %>
       <%= link_to "Register", register_path, class: "btn btn-outline-secondary" %>
     </div>
   <% end %>
